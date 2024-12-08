@@ -106,6 +106,8 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
 
 // Select battery system or fallback
     let recommendedBatteries;
+    let controllerNeeded;
+    let controllerCount;
     if (isHighVoltageSystems) {
         const batterySelection = selectBatterySystem(batteryCount);
         if (batterySelection.error) {
@@ -313,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const phases = parseInt(document.getElementById('private-phase-count').value);
         const inputPower = phases === 1 ?
             (inputCurrent * 230 / 1000) : // Single phase power calculation
-            (inputCurrent * 400 * Math.sqrt(3) / 1000); // Three phase power calculation
+            (inputCurrent * 400 * Math.sqrt(3) / 1000); // Three-phase power calculation
         const monthlyConsumption = parseFloat(document.getElementById('private-monthly-consumption').value) || (inputPower * 720);
         const backupTime = parseFloat(document.getElementById('private-backup-time').value);
 
