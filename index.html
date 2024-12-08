@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="icon" href="https://storage.googleapis.com/lazy-icons/not-found-placeholder.webp" type="image/x-icon">
+    <title>App Name</title>
+</head>
+<body>
+{% include 'partials/_header.html' %}
+<div class="main-content">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-6">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="osbb">ОСББ</button>
+                <button class="tab-button" data-tab="private">Частный дом</button>
+            </div>
+        </div>
+
+        <!-- OSBB Calculator -->
+        <div id="osbb-calculator" class="calculator-tab active">
+            <h1 class="text-2xl font-bold mb-6">Калькулятор солнечной системы - ОСББ</h1>
+            <form id="osbb-form" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Basic Power Requirements -->
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold mb-4">Базовые параметры</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block mb-2">Время резервирования (часы)</label>
+                                <input type="number" id="osbb-backup-time" class="w-full p-2 bg-gray-700 rounded" required>
+                            </div>
+                            <div>
+                                <label class="block mb-2">Количество фаз</label>
+                                <select id="osbb-phase-count" class="w-full p-2 bg-gray-700 rounded">
+                                    <option value="1">Однофазная система</option>
+                                    <option value="3">Трехфазная система</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optional Equipment -->
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h2 class="text-xl font-semibold mb-4">Дополнительное оборудование</h2>
+                        <div class="space-y-4">
+                            <!-- Lifts Section -->
+                            <div id="lifts-container">
+                                <div class="lift-entry mb-4">
+                                    <label class="block mb-2">Лифт 1</label>
+                                    <select class="lift-type w-full p-2 bg-gray-700 rounded mb-2">
+                                        <option value="">Нет лифта</option>
+                                        <option value="passenger">Пассажирский</option>
+                                        <option value="cargo">Грузовой</option>
+                                    </select>
+                                    <div class="lift-power-input hidden">
+                                        <label class="block mb-2">Мощность лифта (кВт)</label>
+                                        <input type="number" class="lift-power w-full p-2 bg-gray-700 rounded mb-2">
+                                        <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
+                                        <input type="number" class="lift-consumption w-full p-2 bg-gray-700 rounded">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" id="add-lift" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                                Добавить лифт
+                            </button>
+
+                            <!-- Pumps Section -->
+                            <div id="pumps-container">
+                                <div class="pump-entry mb-4">
+                                    <label class="block mb-2">Насос 1</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <div>
+                                            <label class="block mb-2">Мощность (кВт)</label>
+                                            <input type="number" class="pump-power w-full p-2 bg-gray-700 rounded">
+                                        </div>
+                                        <div>
+                                            <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
+                                            <input type="number" class="pump-consumption w-full p-2 bg-gray-700 rounded">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" id="add-pump" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                                Добавить насос
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg">
+                        Рассчитать
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Private Home Calculator -->
+        <div id="private-calculator" class="calculator-tab hidden">
+            <h1 class="text-2xl font-bold mb-6">Калькулятор солнечной системы - Частный дом</h1>
+            <form id="private-form" class="space-y-6">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4">Параметры системы</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2">Количество фаз</label>
+                            <select id="private-phase-count" class="w-full p-2 bg-gray-700 rounded">
+                                <option value="1">Однофазная система</option>
+                                <option value="3">Трехфазная система</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-2">Ток вводного автомата (А)</label>
+                            <input type="number" id="input-current" class="w-full p-2 bg-gray-700 rounded" required>
+                        </div>
+                        <div>
+                            <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
+                            <input type="number" id="private-monthly-consumption" class="w-full p-2 bg-gray-700 rounded">
+                        </div>
+                        <div>
+                            <label class="block mb-2">Время резервирования (часы)</label>
+                            <input type="number" id="private-backup-time" class="w-full p-2 bg-gray-700 rounded" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg">
+                        Рассчитать
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="mt-8 hidden">
+            <h2 class="text-xl font-semibold mb-4">Результаты расчета</h2>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <div id="results-content" class="space-y-4">
+                    <!-- Results will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/js/home.js"></script>
+</body>
+</html>
