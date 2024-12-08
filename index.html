@@ -29,14 +29,18 @@
                         <h2 class="text-xl font-semibold mb-4">Базовые параметры</h2>
                         <div class="space-y-4">
                             <div>
+                                <label class="block mb-2">Месячное потребление без лифта и насосов (кВт⋅ч, необязательно)</label>
+                                <input type="number" id="osbb-monthly-consumption" class="w-full p-2 bg-gray-700 rounded">
+                            </div>
+                            <div>
                                 <label class="block mb-2">Время резервирования (часы)</label>
-                                <input type="number" id="osbb-backup-time" class="w-full p-2 bg-gray-700 rounded" required>
+                                <input type="number" id="osbb-backup-time" class="w-full p-2 bg-gray-700 rounded" required value="5">
                             </div>
                             <div>
                                 <label class="block mb-2">Количество фаз</label>
                                 <select id="osbb-phase-count" class="w-full p-2 bg-gray-700 rounded">
-                                    <option value="1">Однофазная система</option>
                                     <option value="3">Трехфазная система</option>
+                                    <option value="1">Однофазная система</option>
                                 </select>
                             </div>
                         </div>
@@ -48,20 +52,7 @@
                         <div class="space-y-4">
                             <!-- Lifts Section -->
                             <div id="lifts-container">
-                                <div class="lift-entry mb-4">
-                                    <label class="block mb-2">Лифт 1</label>
-                                    <select class="lift-type w-full p-2 bg-gray-700 rounded mb-2">
-                                        <option value="">Нет лифта</option>
-                                        <option value="passenger">Пассажирский</option>
-                                        <option value="cargo">Грузовой</option>
-                                    </select>
-                                    <div class="lift-power-input hidden">
-                                        <label class="block mb-2">Мощность лифта (кВт)</label>
-                                        <input type="number" class="lift-power w-full p-2 bg-gray-700 rounded mb-2">
-                                        <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
-                                        <input type="number" class="lift-consumption w-full p-2 bg-gray-700 rounded">
-                                    </div>
-                                </div>
+
                             </div>
                             <button type="button" id="add-lift" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
                                 Добавить лифт
@@ -69,19 +60,6 @@
 
                             <!-- Pumps Section -->
                             <div id="pumps-container">
-                                <div class="pump-entry mb-4">
-                                    <label class="block mb-2">Насос 1</label>
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <div>
-                                            <label class="block mb-2">Мощность (кВт)</label>
-                                            <input type="number" class="pump-power w-full p-2 bg-gray-700 rounded">
-                                        </div>
-                                        <div>
-                                            <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
-                                            <input type="number" class="pump-consumption w-full p-2 bg-gray-700 rounded">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <button type="button" id="add-pump" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
                                 Добавить насос
@@ -114,15 +92,15 @@
                         </div>
                         <div>
                             <label class="block mb-2">Ток вводного автомата (А)</label>
-                            <input type="number" id="input-current" class="w-full p-2 bg-gray-700 rounded" required>
+                            <input type="number" id="input-current" class="w-full p-2 bg-gray-700 rounded" required value="25">
                         </div>
                         <div>
                             <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
-                            <input type="number" id="private-monthly-consumption" class="w-full p-2 bg-gray-700 rounded">
+                            <input type="number" id="private-monthly-consumption" class="w-full p-2 bg-gray-700 rounded" value="500">
                         </div>
                         <div>
                             <label class="block mb-2">Время резервирования (часы)</label>
-                            <input type="number" id="private-backup-time" class="w-full p-2 bg-gray-700 rounded" required>
+                            <input type="number" id="private-backup-time" class="w-full p-2 bg-gray-700 rounded" required value="6">
                         </div>
                     </div>
                 </div>
