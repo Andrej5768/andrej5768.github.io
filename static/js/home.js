@@ -10,38 +10,38 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
     function selectInverter(consumption, phases, isHighVoltage) {
         const inverters = {
             1: [
-                { limit: 3600, model: 'Deye SUN-3,6K-SG03LP1-EU 3,6kW' },
-                { limit: 5000, model: 'Deye SUN-5K-SG04LP1-EU 5kW' },
-                { limit: 6000, model: 'Deye SUN-6K-SG03LP1-EU 6kW' },
-                { limit: 8000, model: 'Deye SUN-8K-SG01LP1-EU 8kW' },
-                { limit: 10000, model: 'Deye SUN-10K-SG02LP1-EU 10kW' },
-                { limit: 12000, model: 'Deye SUN-12K-SG02LP1-EU 12kW' },
-                { limit: 16000, model: 'Deye SUN-16K-SG01LP1-EU 16kW' },
+                {limit: 3600, model: 'Deye SUN-3,6K-SG03LP1-EU 3,6kW'},
+                {limit: 5000, model: 'Deye SUN-5K-SG04LP1-EU 5kW'},
+                {limit: 6000, model: 'Deye SUN-6K-SG03LP1-EU 6kW'},
+                {limit: 8000, model: 'Deye SUN-8K-SG01LP1-EU 8kW'},
+                {limit: 10000, model: 'Deye SUN-10K-SG02LP1-EU 10kW'},
+                {limit: 12000, model: 'Deye SUN-12K-SG02LP1-EU 12kW'},
+                {limit: 16000, model: 'Deye SUN-16K-SG01LP1-EU 16kW'},
             ],
             3: isHighVoltage
                 ? [
-                    { limit: 5000, model: 'Deye SUN-5K-SG01HP3-EU 5kW', controller: true },
-                    { limit: 10000, model: 'Deye SUN-10K-SG01HP3-EU 10kW', controller: true },
-                    { limit: 12000, model: 'Deye SUN-12K-SG01HP3-EU 12kW', controller: true },
-                    { limit: 15000, model: 'Deye SUN-15K-SG01HP3-EU 15kW', controller: true },
-                    { limit: 20000, model: 'Deye SUN-20K-SG01HP3-EU 20kW', controller: true },
-                    { limit: 30000, model: 'Deye SUN-30K-SG01HP3-EU 30kW', controller: true },
-                    { limit: 50000, model: 'Deye SUN-50K-SG01HP3-EU 50kW', controller: true },
+                    {limit: 5000, model: 'Deye SUN-5K-SG01HP3-EU 5kW', controller: true},
+                    {limit: 10000, model: 'Deye SUN-10K-SG01HP3-EU 10kW', controller: true},
+                    {limit: 12000, model: 'Deye SUN-12K-SG01HP3-EU 12kW', controller: true},
+                    {limit: 15000, model: 'Deye SUN-15K-SG01HP3-EU 15kW', controller: true},
+                    {limit: 20000, model: 'Deye SUN-20K-SG01HP3-EU 20kW', controller: true},
+                    {limit: 30000, model: 'Deye SUN-30K-SG01HP3-EU 30kW', controller: true},
+                    {limit: 50000, model: 'Deye SUN-50K-SG01HP3-EU 50kW', controller: true},
                 ]
                 : [
-                    { limit: 5000, model: 'Deye SUN-5K-SG04LP3-EU 5kW' },
-                    { limit: 6000, model: 'Deye SUN-6K-SG04LP3-EU 6kW' },
-                    { limit: 8000, model: 'Deye SUN-8K-SG04LP3-EU 8kW' },
-                    { limit: 10000, model: 'Deye SUN-10K-SG04LP3-EU 10kW' },
-                    { limit: 12000, model: 'Deye SUN-12K-SG04LP3-EU 12kW' },
+                    {limit: 5000, model: 'Deye SUN-5K-SG04LP3-EU 5kW'},
+                    {limit: 6000, model: 'Deye SUN-6K-SG04LP3-EU 6kW'},
+                    {limit: 8000, model: 'Deye SUN-8K-SG04LP3-EU 8kW'},
+                    {limit: 10000, model: 'Deye SUN-10K-SG04LP3-EU 10kW'},
+                    {limit: 12000, model: 'Deye SUN-12K-SG04LP3-EU 12kW'},
                 ],
         };
 
         const selectedInverter = inverters[phases].find(inv => consumption <= inv.limit);
 
         return selectedInverter
-            ? { inverter: selectedInverter.model, controllerNeeded: !!selectedInverter.controller, error: false }
-            : { inverter: '', controllerNeeded: false, error: true };
+            ? {inverter: selectedInverter.model, controllerNeeded: !!selectedInverter.controller, error: false}
+            : {inverter: '', controllerNeeded: false, error: true};
     }
 
     /**
@@ -51,16 +51,16 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
      */
     function selectBatterySystem(batteryCount) {
         const highVoltageSystems = [
-            { model: 'BOS-G15', energy: 15.36, batteries: 3 },
-            { model: 'BOS-G20', energy: 20.48, batteries: 4 },
-            { model: 'BOS-G25', energy: 25.6, batteries: 5 },
-            { model: 'BOS-G30', energy: 30.72, batteries: 6 },
-            { model: 'BOS-G35', energy: 35.84, batteries: 7 },
-            { model: 'BOS-G40', energy: 40.96, batteries: 8 },
-            { model: 'BOS-G45', energy: 46.08, batteries: 9 },
-            { model: 'BOS-G50', energy: 51.2, batteries: 10 },
-            { model: 'BOS-G55', energy: 56.32, batteries: 11 },
-            { model: 'BOS-G60', energy: 61.44, batteries: 12 },
+            {model: 'BOS-G15', energy: 15.36, batteries: 3},
+            {model: 'BOS-G20', energy: 20.48, batteries: 4},
+            {model: 'BOS-G25', energy: 25.6, batteries: 5},
+            {model: 'BOS-G30', energy: 30.72, batteries: 6},
+            {model: 'BOS-G35', energy: 35.84, batteries: 7},
+            {model: 'BOS-G40', energy: 40.96, batteries: 8},
+            {model: 'BOS-G45', energy: 46.08, batteries: 9},
+            {model: 'BOS-G50', energy: 51.2, batteries: 10},
+            {model: 'BOS-G55', energy: 56.32, batteries: 11},
+            {model: 'BOS-G60', energy: 61.44, batteries: 12},
         ];
 
         let remainingBatteries = batteryCount;
@@ -89,8 +89,8 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
         const valid = remainingBatteries <= 0;
 
         return valid
-            ? { systems, controllers: totalControllers, error: false }
-            : { systems: [], controllers: 0, error: true };
+            ? {systems, controllers: totalControllers, error: false}
+            : {systems: [], controllers: 0, error: true};
     }
 
     const consumptionWithMargin = Math.max(monthlyConsumption, totalPowerKvt * 1000) * 1.2;
