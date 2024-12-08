@@ -96,9 +96,9 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
     const consumptionWithMargin = Math.max(monthlyConsumption, totalPowerKvt * 1000) * 1.2;
 
 // High voltage system detection
-    const batteryForInverter = totalPowerKvt * 2 / 5.1;
+    const batteryForInverter = totalPowerKvt * 1.2 * 2 / 5.1;
     let batteryCount = Math.ceil((monthlyConsumption * 1.2 / 720) * backupTime / 5.1) < batteryForInverter
-        ? batteryForInverter
+        ? Math.ceil(batteryForInverter)
         : Math.ceil((monthlyConsumption * 1.2 / 720) * backupTime / 5.1);
     const isHighVoltageSystems = batteryCount > 12 || phases === 3 || consumptionWithMargin > 12000;
     let recommendedInverter = '';
@@ -150,16 +150,16 @@ function calculateInverterAndBatteries(totalPowerKvt, monthlyConsumption, phases
     // Function to display error or results
     function displayResults(error, resultContent, totalConsumption, hourlyConsumption, backupTime, phases, recommendedInverter, recommendedBatteries, batteryCount, controllerNeeded) {
         resultContent.innerHTML = error
-            ? `<p>Ошибка: Расчет не может быть выполнен. Пожалуйста, свяжитесь с нами для получения информации.</p>`
+            ? `<p>Помилка: Розрахунок не може бути виконаний. Будь ласка, зв'яжіться з нами для отримання додаткової інформації.</p>`
             : `
-                <p>Общее месячное потребление: ${totalConsumption.toFixed(2)} кВт⋅ч</p>
-                <p>Среднее потребление в час: ${hourlyConsumption.toFixed(2)} кВт</p>
-                <p>Фактическое время резервирования: ${backupTime.toFixed(0)} ч.</p>
-                <p>Количество фаз: ${phases}</p>
+                <p>Загальне місячне споживання: ${totalConsumption.toFixed(2)} кВт⋅год</p>
+                <p>Середнє споживання за годину: ${hourlyConsumption.toFixed(2)} кВт</p>
+                <p>Фактичний час резервування: ${backupTime.toFixed(0)} год.</p>
+                <p>Кількість фаз: ${phases}</p>
                 <br>
-                <p>Рекомендуемый инвертор: ${recommendedInverter}</p>
-                <p>Рекомендуемые батареи: ${recommendedBatteries} (${batteryCount} шт.)</p>
-                ${controllerNeeded > 0 ? `<p>Требуется контроллер Deye HVB750V/100A ( ${controllerCount} шт.)</p>` : ''}
+                <p>Рекомендований інвертор: ${recommendedInverter}</p>
+                <p>Рекомендовані батареї: ${recommendedBatteries} (${batteryCount} шт.)</p>
+                ${controllerNeeded > 0 ? `<p>Потрібен контролер Deye HVB750V/100A (${controllerNeeded} шт.)</p>` : ''}
             `;
         document.getElementById('results').classList.remove('hidden');
     }
@@ -197,20 +197,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const liftEntry = document.createElement('div');
         liftEntry.className = 'lift-entry mb-4';
         liftEntry.innerHTML = `
-        <label class="block mb-2">Лифт ${liftCount}</label>
+        <label class="block mb-2">Ліфт ${liftCount}</label>
         <div class="grid grid-cols-1 gap-2">
             <div>
-                <label class="block mb-2">Тип лифта</label>
+                <label class="block mb-2">Тип ліфта</label>
                 <select class="lift-type w-full p-2 bg-gray-700 rounded">
-                    <option value="">Выберите тип</option>
-                    <option value="passenger">Пассажирский</option>
-                    <option value="cargo">Грузовой</option>
+                    <option value="">Виберіть тип</option>
+                    <option value="passenger">Пасажирский</option>
+                    <option value="cargo">Вантажний</option>
                 </select>
             </div>
             <div class="lift-power-input hidden">
-                <label class="block mb-2">Мощность лифта (кВт)</label>
+                <label class="block mb-2">Потужність (кВт)</label>
                 <input type="number" class="lift-power w-full p-2 bg-gray-700 rounded mb-2">
-                <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
+                <label class="block mb-2">Місячне споживання (кВт⋅год, необов'язково)</label>
                 <input type="number" class="lift-consumption w-full p-2 bg-gray-700 rounded">
             </div>
         </div>
@@ -249,11 +249,11 @@ document.addEventListener('DOMContentLoaded', function () {
         <label class="block mb-2">Насос ${pumpCount}</label>
         <div class="grid grid-cols-1 gap-2">
             <div>
-                <label class="block mb-2">Мощность (кВт)</label>
+                <label class="block mb-2">Потужність (кВт)</label>
                 <input type="number" class="pump-power w-full p-2 bg-gray-700 rounded">
             </div>
             <div>
-                <label class="block mb-2">Месячное потребление (кВт⋅ч, необязательно)</label>
+                <label class="block mb-2">Місячне споживання (кВт⋅год, необов'язково)</label>
                 <input type="number" class="pump-consumption w-full p-2 bg-gray-700 rounded">
             </div>
         </div>
